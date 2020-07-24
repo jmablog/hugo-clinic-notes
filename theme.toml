@@ -3,8 +3,8 @@
 
 name = "Hugo Clinic Notes"
 license = "MIT"
-licenselink = "https://github.com/jmablog/hugo-clinic-notes/blob/master/themes/hugo-clinic-notes/LICENSE"
-description = "A minimal theme for organising and viewing clinic patient notes"
+licenselink = "https://github.com/jmablog/hugo-clinic-notes/blob/master/LICENSE"
+description = "A minimal theme for generating, organising and viewing markdown patient notes"
 homepage = "https://github.com/jmablog/hugo-clinic-notes/"
 tags = ["notes", "minimal", "minimalistic", "minimalist", "modern", "clean", "white", "docs", "business", "simple"]
 features = ["notes"]
