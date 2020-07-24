@@ -1,0 +1,33 @@
+
+<div class="my-5 flex justify-between">
+    
+    <span class="truncate mr-6">
+        {{ if .PrevInSection}}
+        <a href="{{with .PrevInSection}}{{.Permalink}}{{end}}" class="link">
+            {{with .PrevInSection}}{{ .Date.Format "January 2, 2006" }} - {{ .Param "patient" }} - 
+            {{ if ne .Params.type "other"}}
+            {{ .Param "type" | title }}
+          {{ else }}
+            {{ .Param "description" }}
+          {{end}}
+          {{end}}
+        </a>
+        {{end}}
+    </span>
+    
+    
+    <span class="truncate ml-6">
+        {{ if .NextInSection}}
+        <a href="{{with .NextInSection}}{{.Permalink}}{{end}}" class="link">
+            {{with .NextInSection}}{{ .Date.Format "January 2, 2006" }} - {{ .Param "patient" }} - 
+            {{ if ne .Params.type "other"}}
+            {{ .Param "type" | title }}
+          {{ else }}
+            {{ .Param "description" }}
+          {{end}}
+          {{end}}
+        </a>
+        {{end}}
+    </span>
+    
+  </div>

@@ -1,0 +1,31 @@
+
+<div class="my-5 flex justify-between">
+  
+    <span class="truncate mr-6">
+       {{with (where .Site.RegularPages "Params.patient" ($.Scratch.Get "patientFull")).Prev . }}
+       <a href="{{ .RelPermalink }}" class="link">
+        {{ .Date.Format "January 2, 2006" }} - 
+        {{ if ne .Params.type "other"}}
+        {{ .Param "type" | title }}
+      {{ else }}
+        {{ .Param "description" }}
+      {{end}}
+       </a>
+       {{ end }}
+    </span>
+    
+    
+    <span class="truncate ml-6">
+      {{with (where .Site.RegularPages "Params.patient" ($.Scratch.Get "patientFull")).Next . }}
+      <a href="{{ .RelPermalink }}" class="link">
+        {{ .Date.Format "January 2, 2006" }} - 
+        {{ if ne .Params.type "other"}}
+        {{ .Param "type" | title }}
+      {{ else }}
+        {{ .Param "description" }}
+      {{end}}
+      </a>
+      {{ end }}
+    </span>
+    
+  </div>

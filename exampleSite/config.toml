@@ -1,0 +1,25 @@
+baseURL = "/"
+languageCode = "en-gb"
+title = "Clinic Notes"
+enableEmoji = true
+paginate = 15
+theme = "hugo-clinic-notes"
+
+[taxonomies]
+  patient = "patient"
+
+[[params.menu]]
+  name = "Calendar"
+  url = "all/"
+
+[[params.menu]]
+  name = "Patients"
+  url = "patient/"
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 2
+
+[frontmatter]
+  lastmod = ["lastmod", ":fileModTime", ":default"]
+  alphakey = ["alphakey", "none"]

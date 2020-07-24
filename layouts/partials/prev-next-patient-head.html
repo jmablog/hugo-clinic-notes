@@ -1,0 +1,17 @@
+
+<div class="">
+  
+    <span class="truncate mr-2">
+       {{with (where .Site.RegularPages "Params.patient" ($.Scratch.Get "patientFull")).Prev . }}
+       <a href="{{ .RelPermalink }}" class="link">Prev</a>
+       {{ end }}
+    </span>
+    
+    
+    <span class="truncate ml-2">
+      {{with (where .Site.RegularPages "Params.patient" ($.Scratch.Get "patientFull")).Next . }}
+      <a href="{{ .RelPermalink }}" class="link">Next </a>
+      {{ end }}
+    </span>
+    
+  </div>

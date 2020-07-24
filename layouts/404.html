@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html class="" lang="{{ .Site.LanguageCode }}">
+
+  <head>
+
+    <meta charset="utf-8" />
+    <title>{{ .Site.Title }}</title>
+    <link rel="canonical" href="{{ .Permalink }}" />
+    {{ partial "head-includes.html" . }}
+  </head>
+
+  <body lang="{{ .Site.LanguageCode }}" class="w-2/5 mx-auto py-10">
+    <section id="main">
+      <div>
+        <h1 id="title" class="font-bold mb-5">
+          No file found. Go to:
+        </h1>
+        <ul class="">
+
+          {{ range .Site.Params.menu }}
+          <li class="my-2">
+            <a class="link" href="{{ .url }}">{{ .name }}</a>
+          </li>
+          <!-- prettier-ignore -->
+          {{ end }}
+
+          <li class="my-2">
+            {{ range first 1 ( site.RegularPages.ByDate.Reverse )}}
+            <a class="link" href="{{.Permalink}}">Most recent note by date</a>
+            {{end}}
+          </li>
+
+          <li class="my-2">
+            {{ range first 1 (sort site.RegularPages "Lastmod" "desc")}}
+            <a class="link" href="{{.Permalink}}">Last modified note</a>
+            {{end}}
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    {{ partial "footer.html" . }}
+  </body>
+</html>

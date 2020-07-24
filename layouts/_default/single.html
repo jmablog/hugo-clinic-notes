@@ -1,0 +1,102 @@
+{{ define "main" }}
+{{ $patient := .Params.patient | urlize}}
+{{ $.Scratch.Set "patientFull" (.Params.patient) }}
+
+<div class="w-11/12 md:w-3/5 mx-auto print:w-10/12">
+
+<div class="mb-4 sticky bg-white pt-5 pb-5 top-0 border-b-2 print:hidden z-50">
+<div class="flex justify-between">
+  <div class="inline-block">
+  {{ emojify ":file_folder:" }} 
+<a href="{{ .Site.BaseURL  }}" class="link">Notes</a>
+  <span class=""> / </span>
+  <a href="/patient" class="link">Patients</a>
+  <span class=""> / </span>
+  <a href="/patient/{{ .Params.patient | urlize }}" class="link">{{ .Params.patient }}</a>
+  <span class=""> / </span>
+  <span>{{ .Date.Format "January 2, 2006" }}</span>
+  <span class=""> / </span> 
+  <span class="font-semibold">
+    {{ if ne .Params.type "other"}}
+              {{ .Param "type" | title }}
+            {{ else }}
+              {{ .Param "description" }}
+            {{end}}
+  </span>
+</div>
+<div class="inline-block">
+  {{ partial "prev-next-patient-head.html" . }}
+</div>
+</div>
+
+  <div id="toc" class="mt-4">
+        <span class="inline-block font-semibold mr-2">Jump to: </span>
+        {{ if (.Params.toc ) }}
+          {{ .TableOfContents }}
+        {{ end }}
+        <a href="#othernotes" class="inline-block link">Other notes</a>
+  </div>
+
+</div>
+
+<section id="main" class="">
+
+    <div class="hugo-content md:w-10/12 mx-auto print:w-full">
+      <article itemprop="articleBody" id="content" class="mb-10">
+        {{ .Content }}
+      </article>
+    </div>
+
+  <div class="mx-auto md:w-10/12 print:hidden mb-20 bg-gray-100 pb-1 px-5" id="othernotes">
+
+    <div id="all-other-notes-patient" class="">
+      <!-- other forms for this patient  -->
+      {{ if (isset .Params "patient") }}
+          
+          <h3 class="font-bold bg-gray-200 py-2 my-6 border-l-4 pl-3 border-gray-600 text-lg -mx-5">All other notes for <a href="/patient/{{ $patient }}" class="link">{{ .Params.patient }}</a>:</h3>
+      
+          {{ $forms := index .Site.Taxonomies.patient $patient }}
+         
+          {{ if (gt ($forms | len) 1)}}
+            <ul class="list-disc list-inside">
+              {{ range (where $forms ".File.UniqueID" "!=" .File.UniqueID) }}
+                <li class="my-2">
+                  <a class="link" href="{{ .Permalink}}">{{ .Date.Format "January 2, 2006" }} - 
+                    {{ if ne .Params.type "other"}}
+                    {{ .Param "type" | title }}
+                  {{ else }}
+                    {{ .Param "description" }}
+                  {{end}}</a>
+                </li>
+              {{ end }}
+            </ul>  
+          {{ else }}
+            <div class="">
+              No other notes found for this patient.
+            </div>    
+          {{ end }}
+          
+      {{ end }}
+    </div>
+
+    <div id="prev-next-patient">
+      <h3 class="font-bold bg-gray-200 py-2 my-6 border-l-4 pl-3 border-gray-600 text-lg -mx-5">Previous / next notes for <a href="/patient/{{ $patient }}" class="link">{{ .Params.patient }}</a>:</h3>
+
+      {{ partial "prev-next-patient.html" . }}
+
+    </div>
+
+    <div id="prev-next-date">
+      <h3 class="font-bold bg-gray-200 py-2 my-6 border-l-4 pl-3 border-gray-600 text-lg -mx-5">Previous / next notes by date:</h3>
+
+      {{ partial "prev-next-date.html" .}}
+
+    </div>
+
+  </div>
+</section>
+
+  {{ partial "footer.html" . }}
+
+</div>
+ {{ end }}

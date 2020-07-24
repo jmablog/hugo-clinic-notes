@@ -1,0 +1,34 @@
+{{ define "main" }}
+
+<div class="w-3/5 mx-auto pb-10">
+
+<div class="mb-4 sticky bg-white pt-5 pb-5 top-0 border-b-2 print:hidden">
+  {{ emojify ":file_folder:" }} 
+  <a href="{{ .Site.BaseURL  }}" class="link">Notes</a>
+  <span class=""> / </span>
+  <span class="font-semibold">Calendar</span>
+</div>
+
+<section id="main" class="mb-20 w-10/12 mx-auto">
+    <div>
+      {{ range (.Pages.GroupByDate "Mon 2 January 2006") }}
+        <h3 class="font-semibold py-2 pl-1 my-4 bg-gray-100">{{ .Key }}</h3>
+        <ul class="list-disc list-inside">
+            {{ range .Pages }}
+            <li class="my-2">
+              <a href="{{ .Permalink }}" class="link">{{ .Params.patient }} - 
+                {{ if ne .Params.type "other"}}
+                  {{ .Param "type" | title }}
+                {{ else }}
+                  {{ .Param "description" }}
+                {{end}}
+              </a>
+            </li>
+            {{ end }}
+        </ul>
+        {{ end }}
+    </div>
+</section>
+
+</div>
+{{ end }}

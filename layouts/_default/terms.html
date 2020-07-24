@@ -1,0 +1,45 @@
+{{ define "main" }}
+<div class="w-3/5 mx-auto pb-10">
+
+<div class="mb-5 sticky bg-white pt-5 pb-4 top-0 border-b-2 print:hidden">
+{{ emojify ":file_folder:" }} 
+  <a href="{{ .Site.BaseURL  }}" class="link">Notes</a>
+  <span class=""> / </span>
+  <span class="">Patients</span>
+  <span class=""> / </span>
+  <span class="font-semibold">All by first name</span>
+
+  <div id="toc" class="mt-4">
+    <span class="inline-block font-semibold mr-2">Jump to: </span>
+    {{ range (slice "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z") }}
+    <a href="#{{ . }}" class="inline-block link px-1">{{ . }}</a>
+    {{ end }}
+</div>
+
+</div>
+
+  <section id="main" class="w-10/12 mx-auto">
+    <div>
+      <ul id="list" class="list-disc list-inside">
+        <!-- prettier-ignore -->
+        {{ $.Scratch.Set "current" "-"}}
+        {{ range .Pages.ByTitle }}
+        {{ $firstletter := substr .Title 0 1 }}
+        {{ if ne ($.Scratch.Get "current") $firstletter}}
+          <span class="block font-semibold py-2 pl-1 my-4 bg-gray-100 w-full" id="{{ $firstletter }}">
+            {{ $firstletter }}
+            {{ $.Scratch.Set "current" $firstletter }}
+          </span>
+        {{ end }}
+
+        <li class="my-2">
+          <a class="link" href="{{ .Permalink }}" >{{ .Title }}</a>
+        </li>
+
+        <!-- prettier-ignore -->
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  
+{{ end }}
