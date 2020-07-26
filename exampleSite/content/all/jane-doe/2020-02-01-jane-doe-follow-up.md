@@ -1,11 +1,11 @@
 ---
-patient: "James Adams"
+patient: "Jane Doe"
 type: "follow-up"
 date: 2020-02-01
 toc: false
 ---
 
-# James Adams
+# Jane Doe
 
 **Date:** 1 February 2020
 

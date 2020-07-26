@@ -1,12 +1,12 @@
 ---
-patient: "James Adams"
+patient: "John Smith"
 type: "other"
 description: "Xray From Doctor"
 date:  2020-03-01
 toc: false
 ---
 
-# James Adams
+# John Smith
 
 **Date:** 1 March 2020
 

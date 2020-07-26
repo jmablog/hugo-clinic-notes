@@ -1,11 +1,11 @@
 ---
-patient: "James Adams"
+patient: "John Smith"
 type: "assessment"
 date: 2020-01-01
 toc: true
 ---
 
-# James Adams
+# John Smith
 
 **Date of assessment:** 1 January 2020
 
