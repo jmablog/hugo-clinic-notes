@@ -1,21 +1,24 @@
 ---
-patient: "{{ substr .Name  11 -11 | humanize | title }}"
+patient: "{{ substr .Name  17 -11 | humanize | title }}"
 type: "assessment"
 date: {{ substr .Name 0 10 }}
+time: "{{ replace (substr .Name 11 5) "-" ":" }}"
 toc: true
 ---
 
-# {{ substr .Name  11 -11 | humanize | title }}
+# {{ substr .Name  17 -11 | humanize | title }}
 
-**Date of assessment:** {{ dateFormat "2 January 2006" (substr .Name 0 10) }}
+**Date of assessment:** {{ dateFormat "2 January 2006" (substr .Name 0 10) }}, {{ replace (substr .Name 11 5) "-" ":" }}
 
 ## Patient Details
 
-#### Date of birth: *(age at time of assessment)*
+#### DoB / Age:
 
 #### Email address:
 
 #### Other contact details: *(if provided)*
+
+#### [Informed Consent](/docs/informed-consent/) Agreed: *(note any questions here)*
 
 #### Occupation:
 
@@ -109,11 +112,9 @@ toc: true
 |      |        |       |
 |      |        |       |
 
-### Other Notes & Diagnosis
-
 #### Additional comments:
 
-#### Working diagnosis:
+#### Possible diagnoses:
 
 ## Treatment
 
@@ -125,6 +126,6 @@ toc: true
 
 #### General advice / education given: *(Timeframes, physiology, expectations, resources)*
 
-#### Goals, timeframes and markers:
-
 #### Details of exercises given: *(What, when, why, how long/much, daily movement, graded, flare ups, equipment)*
+
+#### Goals, timeframes and markers:
