@@ -4,11 +4,11 @@ A Hugo theme for the generation, organisation, and viewing of patient notes writ
 
 ![](images/screenshot.png)
 
-- View all notes organised by date
+- View all notes organised by date and appointment time
 - View all patients organised alphabetically
 - Jump straight to latest note by date
 - Jump straight to last modified note
-- Auto generate patient, date, and description metadata from filenames
+- Auto generate patient, date, appointment time, and description metadata from filenames
 
 ### Prerequisites
 
@@ -62,36 +62,44 @@ Patients are added at the time that you need to create a new note for them. All 
 **Filenames are very important for this system!** When you create a note, you must use the filename format:
 
 ```
-hugo new -kind note-type all/patient-name/yyyy-mm-dd-patient-name-note-type.md
+hugo new -kind note-type all/patient-name/yyyy-mm-dd-hh-mm-patient-name-note-type.md
 ```
 
-For example, for a **new assessment** for a patient named John Smith seen on 1st January 2020:
+For example, for a **new assessment** for a patient named John Smith seen at 10:00am on 1st January 2020:
 
 ```
-hugo new --kind assessment all/john-smith/2020-01-01-john-smith-assessment.md
+hugo new --kind assessment all/john-smith/2020-01-01-10-00-john-smith-assessment.md
 ```
 
-Hugo will auto fill in patient name and date fields in resulting markdown file using this filename. The -assessment at the end is needed to correctly strip the filename down to patient name.
+Hugo will auto fill in patient name, date, and appointment time fields in resulting markdown file using this filename. 
 
-For **new follow-up note** for the same patient the next day:
+For **new follow-up note** for the same patient the next day at 11:30am:
 
 ```
-hugo new --kind follow-up all/patient-name/2020-01-02-patient-name-follow-up.md
+hugo new --kind follow-up all/patient-name/2020-01-02-11-30-patient-name-follow-up.md
 ```
 
 Similar to assessment setup, Hugo will auto fill in patient name and date fields and the -follow-up is required to correctly strip the filename.
 
-For a **new other note** for the same patient, again the next day, creating a directory that media (pdfs, images, etc) can be put in and linked to from the form, you can also supply a description of the note at the end of the filename:
+For a **new other note** for the same patient, again the next day at 2pm, creating a directory that media (pdfs, images, etc) can be put in and linked to from the form, you can also supply a description of the note at the end of the filename:
 
 ```
-hugo new --kind other all/john-smith/2020-01-03-john-smith-description_of_contents
+hugo new --kind other all/john-smith/2020-01-03-14-00-john-smith-description_of_contents
 ```
 
-Hugo will again gather the patient name and dates from the filename and fill in appropriately. **But**, notice the lack of `-other` and `.md` at the end of the filename - this is because Hugo is creating a directory, not a file, which will contain an `index.md` file that will be the final editable form.
+Hugo will again gather the patient name and dates/times from the filename and fill in appropriately. **But**, notice the lack of `-other` and `.md` at the end of the filename - this is because Hugo is creating a directory, not a file, which will contain an `index.md` file that will be the final editable form.
 
 It is also important that `description_of_contents` uses `_` (underscores) to separate words rather than `-` dashes so that Hugo will correctly identify and separate the two parts of the filename.
 
 It doesn't matter if a patient is brand new or already exists, it's the exact same commands!
+
+### Adding documents not associated with a patient
+
+Any markdown files you put in `content/docs` will be rendered as a simple page that will be listed in the 'Documents' area from the main menu. This could be useful for any reference materials or documents shared amongst patients, for example, a terms and conditions document. These can also be linked to from other documents, for easy reference from other locations.
+
+### Printing documents
+
+If your browser supports the `@media print` media query, when you print a document or use a print dialogue to save to PDF, the top and bottom menu items will not be included and just the document text will be printed.
 
 ### Editing default notes
 
