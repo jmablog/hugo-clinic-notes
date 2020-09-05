@@ -3,6 +3,7 @@ patient: "John Smith"
 type: "other"
 description: "Xray From Doctor"
 date:  2020-03-01
+time: "10:00"
 toc: false
 ---
 

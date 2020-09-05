@@ -2,6 +2,7 @@
 patient: "John Smith"
 type: "assessment"
 date: 2020-01-01
+time: "10:00"
 toc: true
 ---
 

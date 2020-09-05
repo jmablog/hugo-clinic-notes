@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+<div class="w-3/5 mx-auto pb-10">
+
+<div class="mb-4 sticky bg-white pt-5 pb-5 top-0 border-b-2 print:hidden">
+  {{ emojify ":file_folder:" }} 
+  <a href="{{ .Site.BaseURL  }}" class="link">Notes</a>
+  <span class=""> / </span>
+  <span class="font-semibold">Documents</span>
+</div>
+
+<section id="main" class="mb-20 w-10/12 mx-auto">
+    <div>
+        
+        <ul class="list-disc list-inside">
+            {{ range .Pages }}
+            <li class="my-2">
+              <a href="{{ .Permalink }}" class="link">{{ .Title }}
+              </a>
+            </li>
+            {{ end }}
+        </ul>
+
+    </div>
+</section>
+
+</div>
+{{ end }}

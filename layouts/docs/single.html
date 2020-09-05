@@ -1,0 +1,45 @@
+{{ define "main" }}
+{{ $patient := .Params.patient | urlize}}
+{{ $.Scratch.Set "patientFull" (.Params.patient) }}
+
+<div class="w-11/12 md:w-3/5 mx-auto print:w-10/12">
+
+<div class="mb-4 sticky bg-white pt-5 pb-5 top-0 border-b-2 print:hidden z-50">
+<div class="flex justify-between">
+  <div class="inline-block">
+  {{ emojify ":file_folder:" }} 
+<a href="{{ .Site.BaseURL  }}" class="link">Notes</a>
+  <span class=""> / </span>
+  <a href="/docs" class="link">Documents</a>
+  <span class=""> / </span>
+  <span>{{ .Title }}</span>
+</div>
+<div class="inline-block">
+  {{ partial "prev-next-patient-head.html" . }}
+</div>
+</div>
+
+{{ if (.Params.toc ) }}
+  <div id="toc" class="mt-4">
+        <span class="inline-block font-semibold mr-2">Jump to: </span>
+          {{ .TableOfContents }}
+  </div>
+  {{ end }}
+
+</div>
+
+<section id="main" class="">
+
+    <div class="hugo-content md:w-10/12 mx-auto print:w-full">
+      
+      <article itemprop="articleBody" id="content" class="mb-10">
+        {{ .Content }}
+      </article>
+    </div>
+
+</section>
+
+  {{ partial "footer.html" . }}
+
+</div>
+ {{ end }}

@@ -2,6 +2,7 @@
 patient: "Jane Doe"
 type: "follow-up"
 date: 2020-02-01
+time: "10:00"
 toc: false
 ---
 
